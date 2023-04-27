@@ -8,21 +8,3 @@ class ProductImageSerializer(serializers.ModelSerializer):
         model = ProductImage
         fields = "__all__"
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

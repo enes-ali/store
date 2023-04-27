@@ -1,0 +1,56 @@
+{% load static %}
+
+<header>
+    <a id="brand-container" href="/">
+        <img id="brand-img" src="{% static 'img/brand_logo.jpg' %}" />
+    </a>
+    
+    <nav id="header-nav">
+        <ul id="header-nav-list">
+            {% for category in categories %}
+            <li class="header-nav-index">
+                <div class="category-seperator"></div>
+                <a class="link" href="{{ category.link }}">{{ category.title }}</a>
+
+                <div class="category-menu">
+                    <div>
+                    {% for product_group in category.productgroup_set.all %}
+                    <div class="product_group">
+                        <a class="link" href="{{ product_group.link }}">{{ product_group.name }}</a>
+                        
+                        <div class="subcategory-container">
+                            {% for subcategory in product_group.subcategory_set.all %}
+                            <a id="{{ subcategory.id }}" class="link subcategory" href="{{ subcategory.link }}">
+                                <img src="{{ subcategory.image.url }}"/>
+                                <p>{{ subcategory.name }}</p>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+
+                    <div>
+                        {% for product_group in category.productgroup_set.all %}
+                            {% for subcategory in product_group.subcategory_set.all %}
+                            <div id="{{ subcategory.id }}" class="product-type-container">
+                                {% for product_type in subcategory.producttype_set.all %}
+                                <a class="link product-type" href="{{ product_type.link }}">
+                                    <img src="{{ product_type.image.url }}"/>
+                                    <p>{{ product_type.name }}</p>
+                                </a>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <div class="user-actions">
+
+    </div>
+</header>

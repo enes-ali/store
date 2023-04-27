@@ -1,4 +1,8 @@
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,8 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-34^8-@gcl18lm&%)wc3w7n$rfba)gxgp+nnj)bo(t1#(u-s!v2'
-
+SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -25,7 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "shop",
+    'rest_framework',
+    'shop',
+    'content_management'
 ]
 
 MIDDLEWARE = [
@@ -65,10 +70,10 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "Shop",
-        "PORT": "3306",
-        "USER": "root",
-        "PASSWORD": "Habibi987654321"
+        'NAME': os.getenv("DATABASE_NAME"),
+        "PORT": os.getenv("DATABASE_PORT"),
+        "USER": os.getenv("DATABASE_USER"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD")
     }
 }
 
@@ -97,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Istanbul/Europe'
+TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
 
